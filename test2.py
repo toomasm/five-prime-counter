@@ -1,15 +1,18 @@
-import pybedtools
+#import pybedtools
 from pybedtools import BedTool
 from collections import Counter
 
 
-# The chosen input file is a random test file I got from the Internet and modified for testing my code
+# The chosen input file is a random test file I got from the Internet 
+# and modified for testing my code. Gets the total number of reads from file.
 tool1 = BedTool("test2.bed")
+reads = tool1.count()
 
 
-# Finds the start positions of all reads and stores these to a list calles "Storage"
+# Finds the start positions of all reads and stores these to a list 
+# called "Storage"
 storage = []
-for x in range(0, 100):
+for x in range(0, reads):
     feature = tool1[x]
     if feature.strand == '+':
         start_pos = (feature.start)
@@ -18,8 +21,9 @@ for x in range(0, 100):
         start_pos = (feature.stop)
         storage.append(start_pos)
 
-# Counts the occurrences of a start position and stores the position and the number of occurrences in a dictionary 
-result = {} 
+# Counts the occurrences of a start position and stores the 
+# position and the number of occurrences in a dictionary 
+"""result = {} 
 for x in storage:
     count = storage.count(x)
     result[x] = count
@@ -28,4 +32,7 @@ for x in storage:
         count = count - 1 
         
 for x in result:
-    print x, result[x]
+    print x, result[x]"""
+
+result = Counter(storage)
+print result
